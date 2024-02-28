@@ -15,8 +15,6 @@
  */
 package com.example.marsphotos.ui.screens
 
-//import androidx.compose.foundation.layout.PaddingValues
-
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -33,6 +31,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,19 +50,17 @@ import com.example.marsphotos.ui.theme.MarsPhotosTheme
 
 @Composable
 fun HomeScreen(
-    //marsUiState: MarsUiState,
-    //modifier: Modifier = Modifier,
-    //contentPadding: PaddingValues
-
-    //marsUiState: MarsUiState, retryAction: () -> Unit, modifier: Modifier = Modifier
     marsUiState: MarsUiState,
     retryAction: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
 ) {
     when (marsUiState) {
         is MarsUiState.Loading -> LoadingScreen(modifier = modifier.fillMaxSize())
         //is MarsUiState.Success -> MarsPhotoCard(photo = marsUiState.photos, modifier = modifier.fillMaxSize())
-        is MarsUiState.Success -> PhotosGridScreen(marsUiState.photos, modifier)
+        is MarsUiState.Success -> PhotosGridScreen(
+            marsUiState.photos, contentPadding = contentPadding, modifier = modifier.fillMaxWidth()
+        )
         is MarsUiState.Error -> ErrorScreen(retryAction, modifier = modifier.fillMaxSize())
     }
 }
@@ -118,6 +115,7 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
 
     Card(
         modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
 
@@ -135,6 +133,10 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
     }
 }
 
+
+/**
+ * The home screen displaying photo grid.
+ */
 @Composable
 fun PhotosGridScreen(
     photos: List<MarsPhoto>,
