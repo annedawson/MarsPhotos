@@ -48,7 +48,7 @@ fun MarsPhotosApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val marsViewModel: MarsViewModel =
+                val marsViewModel: MarsViewModel =
                 viewModel(factory = MarsViewModel.Factory)
 
             HomeScreen(

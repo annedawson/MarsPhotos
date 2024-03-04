@@ -63,6 +63,12 @@ class MarsViewModel(private val marsPhotosRepository: MarsPhotosRepository) : Vi
             marsUiState = try {
                 //val result = marsPhotosRepository.getMarsPhotos()[0]
                 //MarsUiState.Success(marsPhotosRepository.getMarsPhotos()[0])
+                /*
+                In the line of code below, in the case of a successful response,
+                you receive Mars photo information from the server.
+                In order to store the data, add a constructor parameter
+                to the Success data class.
+                 */
                 MarsUiState.Success(marsPhotosRepository.getMarsPhotos())
             } catch (e: IOException) {
                 MarsUiState.Error
