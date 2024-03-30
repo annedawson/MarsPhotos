@@ -122,12 +122,12 @@ fun MarsPhotoCard(photo: MarsPhoto, modifier: Modifier = Modifier) {
         AsyncImage(
             model = ImageRequest.Builder(context = LocalContext.current)
                 .data(photo.imgSrc)
-                .crossfade(true)
+                .crossfade(true) // enables crossfade animation when request successfully completes
                 .build(),
             error = painterResource(R.drawable.ic_broken_image),
             placeholder = painterResource(R.drawable.loading_img),
             contentDescription = stringResource(R.string.mars_photo),
-            contentScale = ContentScale.Crop,
+            contentScale = ContentScale.Crop, // fills the entire screen
             modifier = Modifier.fillMaxWidth()
         )
     }

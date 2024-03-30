@@ -24,10 +24,13 @@ import com.example.marsphotos.network.MarsApiService
 interface MarsPhotosRepository {
     /** Fetches list of MarsPhoto from marsApi */
     suspend fun getMarsPhotos(): List<MarsPhoto>
+    // the above is an abstract function that needs implementing
+    // by overriding - see below
 }
 
 /**
- * Network Implementation of Repository that fetch mars photos list from marsApi.
+ * Network Implementation of Repository that fetch
+ * mars photos list from marsApi.
  */
 class NetworkMarsPhotosRepository(
     private val marsApiService: MarsApiService

@@ -20,7 +20,20 @@ import com.example.marsphotos.data.AppContainer
 import com.example.marsphotos.data.DefaultAppContainer
 
 class MarsPhotosApplication : Application() {
-    /** AppContainer instance used by the rest of classes to obtain dependencies */
+
+    // The Application() class is used to initialize
+    // and provide a dependency injection container
+    // to the rest of the app.
+    // The Application class is the base class
+    // for all Android applications.
+    // It is used to initialize the application
+    // and to provide global resources to the rest of the app.
+
+    // NOTE: MarsPhotosApplication is the
+    // Application name in the manifest file
+
+    /** container is the AppContainer instance
+     * used by the rest of classes to obtain dependencies */
     lateinit var container: AppContainer
     override fun onCreate() {
         super.onCreate()

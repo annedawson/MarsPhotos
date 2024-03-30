@@ -44,18 +44,37 @@ fun MarsPhotosApp() {
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = { MarsTopAppBar(scrollBehavior = scrollBehavior) }
-    ) {
+    ) {// viewing this code in Android Studio you will see "it: PaddingValues" here
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
                 val marsViewModel: MarsViewModel =
-                viewModel(factory = MarsViewModel.Factory)
+                     viewModel(factory = MarsViewModel.Factory)
+                     // Factory is a companion object to MarsViewModel
+                     // providing default extras for the ViewModel such as
+                     // the application name, repository and creates the ViewModel
+
+                     // **** see mores comments on factory at the bottom of this file ****
 
             HomeScreen(
-                marsUiState = marsViewModel.marsUiState,
+                marsUiState = marsViewModel.marsUiState,  // One of :Success, Error or Loading
                 retryAction = marsViewModel::getMarsPhotos,
-                contentPadding = it
+                contentPadding = it // see the comment about "it: PaddingValues" above, and see below
             )
+
+            /*
+            The it assigned to contentPadding refers to
+            the value of the contentPadding parameter
+            of the parent composable function. In this case,
+            the parent composable function is the Scaffold()
+            composable function, which is used to provide
+            a basic structure for the app screen.
+             */
+
+            // Look at the definition of Scaffold -
+            // the last parameter is a composable function
+            // with a single parameter of type PaddingValues
+            // that is referred to as 'it' above
         }
     }
 }
@@ -73,3 +92,16 @@ fun MarsTopAppBar(scrollBehavior: TopAppBarScrollBehavior, modifier: Modifier = 
         modifier = modifier
     )
 }
+/*
+Because the Android framework
+does not allow a ViewModel to be passed values
+in the constructor when created,
+we implement a ViewModelProvider.Factory object,
+which lets us get around this limitation.
+
+The Factory pattern is a creational pattern used to create objects.
+The MarsViewModel.Factory object uses the application container
+to retrieve the marsPhotosRepository,
+and then passes this repository to the ViewModel
+when the ViewModel object is created.
+ */

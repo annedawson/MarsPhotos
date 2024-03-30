@@ -30,6 +30,12 @@ interface MarsApiService {
      * the "photos" endpoint will be requested with the GET
      * HTTP method
      */
-    @GET("photos") // to be concatenated to the baseUrl to get the full URL of the JSON resource
+    @GET("photos") // to be concatenated to the baseUrl
+    // to get the full URL of the JSON resource.
+    // the GET interface adds "photos" to
+    // the BASE_URL to get the absolute URL of the photos data
+    // the function just returns the list of photos
+
     suspend fun getPhotos(): List<MarsPhoto>
+    // overridden in the repository
 }
